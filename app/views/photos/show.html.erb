@@ -14,11 +14,10 @@
       <dt>User</dt>
       <dd><%= @photo.user_id %></dd>
 
-      <dt>Favorited by</dt>
       <dd>
         <%= @photo.fans.pluck(:username).to_sentence %>
         <% if @photo.fans.count == 0 %>
-        Be the first to like this photo!
+        Be the first to like
         <% elsif @photo.fans.count > 1 %>
         like
         <% else %>
@@ -27,7 +26,6 @@
         this photo
       </dd>
 
-      <dt>Comments</dt>
       <dd>
         <ul>
         <% @photo.comments.each do |comment| %>

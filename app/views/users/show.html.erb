@@ -4,11 +4,30 @@
   <h3><%= @user.username %></h3>
 
         <dt><a href="/photos/new" button type="button" class="btn btn-primary btn-lg btn-block"">+</a></dt>
-        <p>_</p>
   <% @photos.each do |photo| %>
   <% if @user.id == photo.user_id %>
       <dd><img src="<%= photo.image %>" width="555"></dd>
-      <dd>_</dd>
+
+      <dd>
+        <%= photo.fans.pluck(:username).to_sentence %>
+        <% if photo.fans.count == 0 %>
+        Be the first to like
+        <% elsif photo.fans.count > 1 %>
+        like
+        <% else %>
+        likes
+        <% end %>
+        this photo
+      </dd>
+      <dd>
+        <% photo.comments.each do |comment| %>
+        <h6><%= comment.user.username %>
+          <small>
+          <%= time_ago_in_words(comment.created_at) %> ago
+          </small>
+          </h6>
+        <p><%= comment.body %></p></dd>
+      <% end %>
       <% end %>
       <% end %>
       </div>
