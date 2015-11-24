@@ -14,12 +14,29 @@
       <dt>User</dt>
       <dd><%= @photo.user_id %></dd>
 
+      <dt>Favorited by</dt>
+      <dd>
+        <%= @photo.fans.pluck(:username).to_sentence %>
+        <% if @photo.fans.count == 0 %>
+        Be the first to like this photo!
+        <% elsif @photo.fans.count > 1 %>
+        like
+        <% else %>
+        likes
+        <% end %>
+        this photo
+      </dd>
+
       <dt>Comments</dt>
       <dd>
         <ul>
         <% @photo.comments.each do |comment| %>
         <li>
-        <h6><%= comment.user.username %></h6>
+        <h6><%= comment.user.username %>
+          <small>
+          <%= time_ago_in_words(comment.created_at) %> ago
+          </small>
+          </h6>
         <p><%= comment.body %></p>
         </li>
         <% end %>
@@ -36,22 +53,17 @@
 
       <!-- Label and input for body -->
       <div class="form-group">
-        <label for="body" class="control-label">
+        <label for="body" class="sr-only">
           Body
         </label>
 
-        <textarea id="body" name="body" placeholder="Body" class="form-control" rows="3"><%= @comment.body %></textarea>
+        <input type="text" id="body" name="body" placeholder="Add a comment..." class="form-control">
       </div>
 
       <!-- Label and input for user_id -->
 
         <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
 
-      <button class="btn btn-success">
-        Create Comment
-      </button>
-      or
-      <a href="/comments">Cancel</a>
     </form>
   </div>
 </div>
