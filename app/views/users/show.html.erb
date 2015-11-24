@@ -3,10 +3,12 @@
         <div class="col-md-offset-3 col-md-6">
   <h3><%= @user.username %></h3>
 
-  <% if @user.id == @photo.user_id %>
         <dt><a href="/photos/new" button type="button" class="btn btn-primary btn-lg btn-block"">+</a></dt>
+        <p>_</p>
   <% @photos.each do |photo| %>
+  <% if @user.id == photo.user_id %>
       <dd><img src="<%= photo.image %>" width="555"></dd>
+      <dd>_</dd>
       <% end %>
       <% end %>
       </div>

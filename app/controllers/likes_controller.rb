@@ -49,8 +49,6 @@ class LikesController < ApplicationController
   end
 
   def my
-    @user = User.find(params[:id])
-    @like = Like.find(params[:id])
-    @photos = Photo.all
+    @photos = current_user.liked_photos
   end
 end

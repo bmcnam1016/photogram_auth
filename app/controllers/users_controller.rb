@@ -6,7 +6,6 @@ end
 
 def show
   @user = User.find(params[:id])
-  @photo = Photo.find(params[:id])
   @photos = Photo.all
 end
 end
