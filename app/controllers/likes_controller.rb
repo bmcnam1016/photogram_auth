@@ -50,5 +50,6 @@ class LikesController < ApplicationController
 
   def my
     @photos = current_user.liked_photos
+    @comment = Comment.new
   end
 end
